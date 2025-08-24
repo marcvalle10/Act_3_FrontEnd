@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es-MX" class="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Proyecto Delfín 2025: Predicción de la calidad del aire en México mediante aprendizaje automático." />
+    <meta name="theme-color" content="#0b0f14" />
+    <title>Proyecto Delfín 2025 — Predicción de Calidad del Aire</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        base: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1f2937',
+                            900: '#0b0f14',
+                            950: '#07090c'
+                        },
+                        accent: {
+                            500: '#60a5fa',
+                            600: '#3b82f6'
+                        }
+                    },
+                    boxShadow: {
+                        soft: '0 10px 25px -10px rgba(0,0,0,.45)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Fallback mínimo si no carga Tailwind */
+        
+        body {
+            background: #0b0f14;
+            color: #e2e8f0;
+            font-family: ui-sans-serif, system-ui;
+            -webkit-font-smoothing: antialiased
+        }
+        
+         ::selection {
+            background: #3b82f6;
+            color: #fff
+        }
+        
+        html {
+            scroll-behavior: smooth
+        }
+    </style>
+</head>
+
+<body class="bg-base-900 text-base-200 tracking-[.01em]">
+    <!-- Barra superior -->
+    <header class="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-base-900/70 bg-base-900/90 border-b border-base-700">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3">
+            <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-base-600 to-base-800 flex items-center justify-center shadow-soft">
+                <span class="text-xs font-bold text-base-200">AQI</span>
+            </div>
+            <div class="flex-1">
+                <h1 class="text-base-100 text-lg md:text-xl font-semibold leading-tight">Predicción de la Calidad del Aire — Proyecto Delfín 2025</h1>
+                <p class="text-base-400 text-sm hidden md:block">Aprendizaje automático aplicado al AQI en contextos con datos limitados</p>
+            </div>
+            <a href="#contacto" class="hidden sm:inline-flex items-center gap-2 text-sm px-3 py-1.5 rounded-lg bg-accent-600 text-white shadow-soft hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-accent-600/40">Contacto</a>
+        </div>
+        <!-- Navegación -->
+        <nav class="border-t border-base-800 overflow-x-auto">
+            <ul class="max-w-5xl mx-auto flex gap-2 px-2 py-2 text-sm">
+                <li><a class="tab" href="#resumen">Resumen</a></li>
+                <li><a class="tab" href="#objetivos">Objetivos</a></li>
+                <li><a class="tab" href="#alcance-limitaciones">Alcance</a></li>
+                <li><a class="tab" href="#problematica-justificacion">Problemática</a></li>
+                <li><a class="tab" href="#antecedentes">Antecedentes</a></li>
+                <li><a class="tab" href="#metodologia">Metodología</a></li>
+                <li><a class="tab" href="#resultados">Resultados</a></li>
+                <li><a class="tab" href="#conclusiones">Conclusiones</a></li>
+                <li><a class="tab" href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-10">
+        <!-- Hero/encabezado de autores -->
+        <section class="rounded-2xl bg-gradient-to-br from-base-800 to-base-900 border border-base-700 p-6 md:p-8 shadow-soft">
+            <div class="grid md:grid-cols-2 gap-6 items-start">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-semibold text-white">Zonas Urbanas de México</h2>
+                    <p class="mt-2 text-base-300">Programa Delfín 2025 — Proyecto de verano de investigación</p>
+                    <dl class="mt-4 text-sm leading-6">
+                        <div class="grid grid-cols-[7.5rem_1fr] gap-x-2">
+                            <dt class="text-base-400">Autores:</dt>
+                            <dd class="text-base-200">Marcos Vallejo Leyva · Br. Andrés Antonio Chan Cach</dd>
+                            <dt class="text-base-400">Asesora:</dt>
+                            <dd class="text-base-200">Mtra. Edurnet Jhaquelin Luna Becerril</dd>
+                            <dt class="text-base-400">Lugar/Fecha:</dt>
+                            <dd class="text-base-200">Texcoco, Edo. Méx., julio de 2025</dd>
+                        </div>
+                    </dl>
+                </div>
+                <div class="rounded-xl border border-base-700 p-4 bg-base-900/60">
+                    <p class="text-base-300 text-sm">Navegación rápida</p>
+                    <div class="mt-2 grid grid-cols-2 gap-2 text-sm">
+                        <a class="chip" href="#resumen">Resumen</a>
+                        <a class="chip" href="#metodologia">Metodología</a>
+                        <a class="chip" href="#resultados">Resultados</a>
+                        <a class="chip" href="#conclusiones">Conclusiones</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESUMEN -->
+        <section id="resumen" class="card">
+            <h3 class="h">Resumen</h3>
+            <p>
+                La contaminación del aire es un desafío crítico para la salud y el medio ambiente en zonas urbanas. Este proyecto aplica <strong>aprendizaje automático</strong> para <strong>analizar y predecir el AQI</strong> combinando variables meteorológicas
+                (temperatura, humedad, presión y viento) y niveles de contaminantes (PM2.5, PM10, O3, NO2, CO y SO2). Se trabajó con <strong>tres datasets</strong> de alcance internacional ante la <em>escasez de datos locales abiertos y continuos en México</em>.
+            </p>
+            <p class="mt-3">
+                Los mejores resultados se obtuvieron con <strong>MLPRegressor</strong>, usando como entradas <em>temperatura</em>, <em>humedad</em>, <em>velocidad del viento</em> y <em>hora del día</em>. Se propuso un <strong>índice de contaminantes</strong>                para comparar países; México se ubicó en una posición intermedia.
+            </p>
+
+            <figure class="mt-6">
+                <img src="./img/calidad_airemex.png" alt="Calidad del Aire en México" class="rounded-lg">
+                <figcaption class="cap">Calidad del Aire en México.</figcaption>
+            </figure>
+        </section>
+
+        <!-- OBJETIVOS -->
+        <section id="objetivos" class="card">
+            <h3 class="h">Objetivos</h3>
+            <h4 class="sub">Objetivo general</h4>
+            <p>Diseñar e implementar un modelo predictivo basado en técnicas de aprendizaje automático para anticipar niveles de AQI en zonas urbanas de México.</p>
+            <h4 class="sub mt-6">Objetivos específicos</h4>
+            <ol class="list-decimal pl-6 space-y-1">
+                <li>Recolectar y organizar datos públicos (calidad del aire, meteorología y factores geoespaciales).</li>
+                <li>Caracterizar niveles y distribución de contaminantes por país, con énfasis en México.</li>
+                <li>Explorar tendencias y correlaciones entre contaminantes y variables ambientales.</li>
+                <li>Entrenar y comparar modelos de <em>regresión</em> y <em>clasificación</em> con métricas estándar.</li>
+                <li>Evaluar la <em>adaptabilidad</em> de modelos a contextos mexicanos con datos limitados.</li>
+                <li>Definir un <strong>índice de contaminantes</strong> para comparaciones internacionales.</li>
+                <li>Visualizar resultados de forma clara para apoyar la toma de decisiones.</li>
+            </ol>
+        </section>
+
+        <!-- ALCANCE Y LIMITACIONES -->
+        <section id="alcance-limitaciones" class="card">
+            <h3 class="h">Alcance y limitaciones</h3>
+            <p>
+                Estudio <em>exploratorio y propositivo</em> que valida preliminarmente modelos predictivos con datos internacionales por la limitada disponibilidad de datos locales continuos. El enfoque permanece orientado a su <strong>aplicación en México</strong>                y su futura <strong>replicabilidad</strong> con mejores fuentes.
+            </p>
+            <ul class="list-disc pl-6 mt-3 space-y-1">
+                <li><strong>Alcance:</strong> diseño, implementación y evaluación inicial de modelos; propuesta de índice y visualizaciones.</li>
+                <li><strong>Limitaciones:</strong> cobertura desigual de estaciones en México (SINAICA), registros incompletos y dificultades de acceso masivo.</li>
+            </ul>
+        </section>
+
+        <!-- PROBLEMÁTICA Y JUSTIFICACIÓN -->
+        <section id="problematica-justificacion" class="card">
+            <h3 class="h">Problemática y justificación</h3>
+            <p>
+                México carece de una plataforma nacional integrada, estandarizada y abierta para <strong>predicción</strong> y <strong>análisis</strong> del AQI. La cobertura y calidad de datos son heterogéneas, lo que dificulta políticas basadas en evidencia.
+                Modelos de ML pueden facilitar <em>alertas tempranas</em>, estimación de riesgos y planificación de mitigación.
+            </p>
+            <ul class="list-disc pl-6 mt-3 space-y-1">
+                <li><strong>Salud pública:</strong> proteger a población vulnerable ante episodios críticos.</li>
+                <li><strong>Decisiones:</strong> apoyar regulación de emisiones y ubicación de estaciones.</li>
+                <li><strong>Tecnología:</strong> aprovechar <em>datos abiertos</em> con IA para soluciones escalables.</li>
+            </ul>
+        </section>
+
+        <!-- ANTECEDENTES -->
+        <section id="antecedentes" class="card">
+            <h3 class="h">Antecedentes</h3>
+            <p>
+                Estudios internacionales han empleado Random Forest, redes neuronales y modelos de clasificación con buenos resultados. En México existen esfuerzos en CDMX y SLP, pero aún aislados. Es necesario un enfoque <strong>replicable y escalable</strong>                con <em>datos abiertos</em> y métodos robustos.
+            </p>
+        </section>
+
+        <!-- METODOLOGÍA -->
+        <section id="metodologia" class="card">
+            <h3 class="h">Metodología</h3>
+            <h4 class="sub">Herramientas</h4>
+            <ul class="list-disc pl-6 space-y-1">
+                <li>Python 3.11, Pandas, NumPy</li>
+                <li>Matplotlib, Seaborn</li>
+                <li>Scikit-learn (escalado, regresión, clasificación, validación, métricas)</li>
+                <li>Google Colab</li>
+            </ul>
+            <h4 class="sub mt-6">Fases</h4>
+            <ol class="list-decimal pl-6 space-y-1">
+                <li><strong>Recolección:</strong> tres datasets internacionales (aire y meteorología) por escasez de datos locales abiertos.</li>
+                <li><strong>Limpieza y preprocesamiento:</strong> eliminación de nulos y duplicados; normalización; codificación; desglose temporal.</li>
+                <li><strong>EDA:</strong> distribución por estados/países, correlaciones, detección y remoción de valores inconsistentes.</li>
+                <li><strong>Modelado:</strong> RandomForestRegressor, LinearRegression, MLPRegressor; clasificación con RandomForestClassifier.</li>
+                <li><strong>Evaluación:</strong> MAE, RMSE, R²; Figura de Mérito (FoM) con z-scores y PCA.</li>
+            </ol>
+
+            <h4 class="sub mt-6">Estructura de los datasets</h4>
+            <div class="table-wrap">
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Variables categóricas</th>
+                            <th>Variables numéricas</th>
+                            <th>Notas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>País, Estado, Ciudad, Fecha, Contaminante, Predominante</td>
+                            <td>Lat, Lon, AQI (min, max, avg, medido), Temperatura, Humedad</td>
+                            <td>Con fecha; 4,620→4,538 filas; 2024‑06‑18 a 2025‑06‑20.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>País, Estado</td>
+                            <td>Temperatura, Humedad, Viento, Presión, Hora del día, AQI</td>
+                            <td>Sin fecha explícita; 5,000 filas; sin nulos.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>País, Estado</td>
+                            <td>D2 + PM2.5, PM10, NO2, SO2, CO, O3</td>
+                            <td>Extensión del D2; 5,000 filas; sin nulos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- RESULTADOS -->
+        <section id="resultados" class="card">
+            <h3 class="h">Resultados clave</h3>
+            <h4 class="sub">Mejor desempeño por dataset (Regresión)</h4>
+            <div class="table-wrap">
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Features destacados</th>
+                            <th>Algoritmo</th>
+                            <th>Métricas</th>
+                            <th>Comentario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>País, Estado, Contaminante</td>
+                            <td>MLPRegressor</td>
+                            <td>MAE≈69.17 · RMSE≈85.50 · R²≈0.003</td>
+                            <td>Precisión limitada; D1 no predice bien AQI (sin usar Avg por correlación≈1).</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Temperatura, Humedad, Viento, Hora</td>
+                            <td>MLPRegressor</td>
+                            <td>MAE≈8.11 · RMSE≈10.21 · R²≈0.86</td>
+                            <td>Excelente poder predictivo con variables meteorológicas.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Temperatura, Humedad, Viento, Hora</td>
+                            <td>MLPRegressor</td>
+                            <td>MAE≈8.12 · RMSE≈10.12 · R²≈0.86</td>
+                            <td>Rendimiento similar al D2 aun con contaminantes explícitos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="sub mt-6">Hallazgos sobre contaminantes</h4>
+            <ul class="list-disc pl-6 space-y-1">
+                <li>En México predominan <strong>PM2.5</strong> y <strong>O3</strong> en zonas urbanas.</li>
+                <li><strong>Índice de Contaminantes (IC)</strong>: promedio de AQI por país para comparaciones.</li>
+                <li>Ranking con IC ubica a México en posición <em>intermedia</em>.</li>
+            </ul>
+
+            <details class="mt-4">
+                <summary class="cursor-pointer text-base-300 hover:text-base-200">Figuras de resultados de los alanisis de datos</summary>
+                <div class="mt-3 grid sm:grid-cols-2 gap-4">
+                    <figure class="imgbox">
+                        <img src="./img/distribucionaqi.jpg" alt="Distribución de valores de AQI" class="rounded-lg" />
+                        <figcaption class="cap">Distribución de valores de AQI por dataset.</figcaption>
+                    </figure>
+                    <figure class="imgbox">
+                        <img src="./img/ranking_paises.jpg" alt="Ranking de países por índice de contaminantes" class="rounded-lg" />
+                        <figcaption class="cap">Ranking de países por índice de contaminantes.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/aaplot2.jpg" alt="Conteo de entradas por estado para el dataset 1" class="rounded-lg" />
+                        <figcaption class="cap">Conteo de entradas por estado para el dataset 1.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/fig_4.jpg" alt="Matriz de correlación de las variables del Dataset 1 transformado" class="rounded-lg" />
+                        <figcaption class="cap">Matriz de correlación de las variables del Dataset 1 transformado.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/boxplot_aqi.jpg" alt="Valores de AQI medido, mínimo, máximo y promedio para el Dataset 1 transformado" class="rounded-lg" />
+                        <figcaption class="cap">Valores de AQI medido, mínimo, máximo y promedio para el Dataset 1 transformado.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/fig_contaminantes_paises.jpg" alt=" Distribución de contaminantes por país" class="rounded-lg" />
+                        <figcaption class="cap"> Distribución de contaminantes por país.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./img/fig_dist_mexico.jpg" alt="Distribución de los seis contaminantes principales en tres estados de México en función de la hora del día" class="rounded-lg" />
+                        <figcaption class="cap">Distribución de los seis contaminantes principales en tres estados de México en función de la hora del día.</figcaption>
+                    </figure>
+
+                </div>
+            </details>
+
+            <p class="mt-6 text-right"><a class="chip" href="#top">Volver arriba</a></p>
+        </section>
+
+        <!-- CONCLUSIONES -->
+        <section id="conclusiones" class="card">
+            <h3 class="h">Conclusiones</h3>
+            <ul class="list-disc pl-6 space-y-1">
+                <li>Temperatura, humedad y viento son <strong>altamente predictivas</strong> del AQI.</li>
+                <li>Datasets 2 y 3: <strong>bajo error</strong> con MLPRegressor (R²≈0.86).</li>
+                <li>Dataset 1 no es adecuado sin <em>Avg</em> (correlación≈1 con la variable objetivo).</li>
+                <li>México se ubica a media tabla en el IC; hay margen de mejora.</li>
+                <li>Enfoque <strong>replicable</strong> para alertas tempranas y apoyo a decisiones.</li>
+            </ul>
+        </section>
+
+        <!-- CONTACTO -->
+        <section id="contacto" class="card">
+            <h3 class="h">Contacto</h3>
+            <address class="not-italic leading-7">
+        <strong>Autor:</strong> Marcos Vallejo Leyva — Hermosillo, Sonora, México<br />
+        Correo: <a class="text-accent-500 hover:underline" href="marcosvalle546@gmail.com?subject=Consulta%20Proyecto%20Delfin">marcosvalle546@gmail.com</a>
+      </address>
+            <p class="mt-2 text-sm text-base-300">Referencia: <a class="underline hover:no-underline" href="https://www.w3schools.com/html" target="_blank" rel="noopener">W3Schools (HTML)</a></p>
+        </section>
+    </main>
+
+    <footer class="border-t border-base-800/70">
+        <div class="max-w-5xl mx-auto px-4 py-8 text-sm text-base-400">
+            <p>© <time datetime="2025">2025</time> Proyecto Delfín. Última actualización: <time datetime="2025-08-21">21 de agosto de 2025</time>.</p>
+        </div>
+    </footer>
+
+    <!-- Utilidades de estilo con Tailwind -->
+    <style>
+        .tab {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem .75rem;
+            border-radius: .65rem;
+            border: 1px solid rgb(51 65 85/0.6);
+            background: linear-gradient(180deg, rgba(30, 41, 59, .6), rgba(15, 23, 42, .6));
+            color: #cbd5e1;
+            white-space: nowrap
+        }
+        
+        .tab:hover {
+            filter: brightness(1.1)
+        }
+        
+        .card {
+            border: 1px solid rgb(51 65 85/0.6);
+            border-radius: 1rem;
+            background: linear-gradient(180deg, rgba(31, 41, 55, .6), rgba(15, 23, 42, .6));
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px -12px rgba(0, 0, 0, .5)
+        }
+        
+        .h {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+            color: #e5e7eb;
+            font-weight: 600;
+            margin-bottom: .75rem
+        }
+        
+        .sub {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: #cbd5e1;
+            font-weight: 600;
+            margin-bottom: .5rem
+        }
+        
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgb(51 65 85/0.6);
+            padding: .4rem .75rem;
+            border-radius: .75rem;
+            background: rgba(2, 6, 23, .6);
+            color: #cbd5e1
+        }
+        
+        .table-wrap {
+            overflow: auto;
+            border: 1px solid rgb(51 65 85/0.6);
+            border-radius: .75rem
+        }
+        
+        table thead th {
+            position: sticky;
+            top: 0;
+            background: #0b0f14;
+            color: #cbd5e1;
+            font-weight: 600;
+            padding: .75rem;
+            border-bottom: 1px solid rgb(51 65 85/0.6)
+        }
+        
+        table tbody td {
+            padding: .75rem;
+            border-top: 1px solid rgb(51 65 85/0.25)
+        }
+        
+        .imgbox {
+            border: 1px solid rgb(51 65 85/0.6);
+            border-radius: .75rem;
+            padding: .5rem;
+            background: rgba(2, 6, 23, .5)
+        }
+        
+        .cap {
+            margin-top: .35rem;
+            color: #94a3b8;
+            font-size: .85rem
+        }
+    </style>
+</body>
+
+</html>
